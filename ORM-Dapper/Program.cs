@@ -20,6 +20,7 @@ namespace ORM_Dapper
             
             IDbConnection conn = new MySqlConnection(connString);
 
+            //Department Repo Demo
             var departmentRepo = new DapperDepartmentRepository(conn);
 
             departmentRepo.InsertDepartment("Misc");
@@ -30,6 +31,19 @@ namespace ORM_Dapper
             {
                 Console.WriteLine($"{department.DepartmentID} {department.Name}");
             }
+
+            //Product Repo Demo
+            var productRepo = new DapperProductRepository(conn);
+
+            productRepo.CreateProduct("iPhone 13", 799.00, 3);
+
+            var products = productRepo.GetAllProducts();
+
+            foreach (var product in products)
+            {
+                Console.WriteLine($"{product.ProductID} {product.Name} {product.Price} {product.CategoryID} {product.OnSale} {product.StockLevel}");
+            }
+
         }
     }
 }
